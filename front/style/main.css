@@ -46,7 +46,7 @@ header nav a:hover{
 
 .tela-principal{
     font-size: 16px;
-    background: linear-gradient(rgba(0,0,0,.50),rgba(0,0,0,.50)100%), url('/img/capa-chris.jpg');
+    background: linear-gradient(rgba(0,0,0,.50),rgba(0,0,0,.50)100%), url('/front/img/capa-chris.jpg');
 
 
     height: 600px;
