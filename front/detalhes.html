@@ -18,7 +18,7 @@
     </section>
     <aside>    
         <section id="informacoes">
-            <h1 id="nome"></h1>
+            <h1 id="nome-serie"></h1>
             <div>
                 <h2 id="ano"></h2>
             </div>
@@ -38,7 +38,23 @@
 </main>
 <footer>
     <div>
-        comentarios
+        <div>
+            <h2>Deixe aqui seu comentário:</h2>
+        </div>
+        <form action="http://localhost:3003/comentar" method="POST">
+            <input type="hidden" id="input_idserie" name="input_idserie"/>
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome"/>
+            </div>
+            <div>
+                <label for="comentario">Comentário:</label>
+                <textarea id="comentario" name="comentario"></textarea>
+            </div>
+            <div class="button">
+                <button type="submit">Enviar comentário</button>
+            </div>
+        </form>
     </div>
 </footer>
 

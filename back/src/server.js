@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require ('express')
 const app = express()
-//const dataBase = require('./database/databaseKnex')
+const dataBase = require('./database/databaseKnex')
 const bodyParser = require('body-parser')
 const axios = require('axios');
 
@@ -46,7 +46,8 @@ app.get('/detalheSerie/:id', async(req, res) => {
             ano: response.data.first_air_date,
             avaliacoes: response.data.vote_average,
             classificacao: genreName.join(', '),
-            sinopse: response.data.overview
+            sinopse: response.data.overview,
+            id: response.data.id
         }
         res.send(detalheSerie)
     })
@@ -54,6 +55,14 @@ app.get('/detalheSerie/:id', async(req, res) => {
         console.log(error);
     });
 })
-
+app.post ('/comentar', async(req, res) => {
+    console.log(req.body)
+    const comentario = await dataBase.salvarComentario({
+        nome: req.body.nome,
+        comentario: req.body.comentario,
+        id_serie: req.body.input_idserie,
+    })
+    res.send(comentario)
+})
 
 app.listen(3003)
