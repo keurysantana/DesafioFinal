@@ -23,4 +23,9 @@ async function salvarComentario(comentario){
         }
     }
 }
-module.exports = {salvarComentario}
+async function listarComentarios(id_serie){
+    const result = await databaseConnection('tmdb_table').select('*').where({'id_serie':id_serie})
+    return result
+}
+
+module.exports = {salvarComentario, listarComentarios}

@@ -5,7 +5,6 @@ async function getDetalhe(id) {
     try {
         const response = await fetch('http://localhost:3003/detalheSerie/'+id)
         const data = await response.json()
-        console.log(data)
         $("#imagem").prepend('<img src="'+data.urlFoto+'">');
         $("#nome-serie").prepend(data.nome)
         $("#ano").prepend(data.ano)
@@ -18,4 +17,21 @@ async function getDetalhe(id) {
     }
 }
 
-getDetalhe(idSerie)
+async function getComentario(id) {
+    try {
+        const response = await fetch('http://localhost:3003/comentarios/'+id)
+        const data = await response.json()
+        for(let c of data){
+            let comHtml = '<div>Nome: ' + c.nome + '</div>'
+                            + '<div>Data: ' + c.data_comentario + '</div>'
+                            + '<div>Comentario' + c.comentario + '</div>'
+            $("#comentario_back").append(comHtml)
+        }    
+    } catch (error) {
+        console.log('falha'+ error)
+    }
+}
+
+getDetalhe(idSerie);
+
+getComentario(idSerie);

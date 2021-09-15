@@ -64,5 +64,11 @@ app.post ('/comentar', async(req, res) => {
     })
     res.send(comentario)
 })
+app.get ('/comentarios/:id', async(req, res) => {
+    console.log(req.params.id)
+    const comentarios = await dataBase.listarComentarios(req.params.id)
+    console.log(comentarios)
+    res.send(comentarios)
+})
 
 app.listen(3003)

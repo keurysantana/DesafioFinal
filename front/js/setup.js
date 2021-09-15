@@ -21,7 +21,6 @@ async function getSeries() {
     try {
         const response = await fetch('http://localhost:3003/listaPrincipal')
         const data = await response.json()
-        console.log(data)
         for (let serie of data) {
             $("#carousel-itens").prepend(
                 '<div class="item"><a href="detalhes.html?serieid='+serie.id+'"><img class="box-serie" src="http://image.tmdb.org/t/p/w342'+serie.foto+'" alt="" srcset=""></a></div>'
