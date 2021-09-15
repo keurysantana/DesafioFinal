@@ -35,3 +35,21 @@ async function getComentario(id) {
 getDetalhe(idSerie);
 
 getComentario(idSerie);
+
+$(function(){
+    $('form').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3003/comentar',
+            data: {
+                input_idserie: e.target.input_idserie.value,
+                nome: e.target.nome.value,
+                comentario: e.target.comentario.value
+            },
+            success: function() {
+                getComentario(idSerie);
+            }
+        });
+    })
+})
