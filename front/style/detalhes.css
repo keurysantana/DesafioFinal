@@ -1,0 +1,26 @@
+body{
+    padding: 5% 10%;
+}
+
+header {
+    padding: 10px;
+}
+
+main{
+    background-color: darkgray;
+    padding: 10px;
+}
+
+img{
+  margin-right: 20px;  
+}
+
+footer{
+    background-color: rosybrown;
+    color: black;
+    padding: 10px;
+}
+
+section{
+    margin-top: 10px;
+}

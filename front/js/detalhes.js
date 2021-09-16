@@ -22,9 +22,13 @@ async function getComentario(id) {
         const response = await fetch('http://localhost:3003/comentarios/'+id)
         const data = await response.json()
         for(let c of data){
-            let comHtml = '<div>Nome: ' + c.nome + '</div>'
-                            + '<div>Data: ' + c.data_comentario + '</div>'
-                            + '<div>Comentario' + c.comentario + '</div>'
+            let dataCom = new Date(c.data_comentario)
+            let dataFormatada = (dataCom.getDate()) + "/" + (dataCom.getMonth()) + "/" + (dataCom.getFullYear());
+            let comHtml = '<section>'
+                            + '<div>Nome: ' + c.nome + '</div>'
+                            + '<div>Data: ' + dataFormatada + '</div>'
+                            + '<div>Comentário: ' + c.comentario + '</div>'
+                        + '</section>'
             $("#comentario_back").append(comHtml)
         }    
     } catch (error) {
@@ -49,6 +53,7 @@ $(function(){
             },
             success: function() {
                 getComentario(idSerie);
+                e.target.reset();
             }
         });
     })
