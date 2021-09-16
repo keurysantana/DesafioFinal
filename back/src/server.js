@@ -10,21 +10,26 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
 app.get ('/listaPrincipal', async(req, res) => {
-    const listaSeries = [
-        {
-            id: 86848,
-            foto:"/2gyQRudrRU276fvkXMq4JNq3hzB.jpg"
-        },
-        {
-            id: 46404,
-            foto:"/3V0hFx8NgYXVfHfoMOuAXs3rb1J.jpg"
-        },
-        {
-            id: 1622,
-            foto: "/ovFzkkKknAo2SbM2DfOabxRvzmy.jpg"
+    var config = {
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/search/tv?api_key=7bd965a9aa82c3b1f149fb83984aa103&query=love&language=pt-PT',
+        headers: { }
+    };
+
+    axios(config)
+    .then(function (response){
+        let listaSeries = []
+        for(let serie of response.data.results){
+            listaSeries.push({
+                id: serie.id,
+                foto: serie.poster_path
+            }) 
         }
-    ] 
-    res.send(listaSeries)
+        res.send(listaSeries)
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 })
 
 app.get('/detalheSerie/:id', async(req, res) => {
@@ -56,7 +61,6 @@ app.get('/detalheSerie/:id', async(req, res) => {
     });
 })
 app.post ('/comentar', async(req, res) => {
-    console.log(req.body)
     const comentario = await dataBase.salvarComentario({
         nome: req.body.nome,
         comentario: req.body.comentario,
@@ -65,9 +69,7 @@ app.post ('/comentar', async(req, res) => {
     res.send(comentario)
 })
 app.get ('/comentarios/:id', async(req, res) => {
-    console.log(req.params.id)
     const comentarios = await dataBase.listarComentarios(req.params.id)
-    console.log(comentarios)
     res.send(comentarios)
 })
 

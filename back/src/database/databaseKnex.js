@@ -11,7 +11,6 @@ async function salvarComentario(comentario){
     const result = await databaseConnection('tmdb_table').insert(insertComentario)
 
     if(result) {
-        console.log(result)
         return{
             ...comentario,
             id: result[0]
