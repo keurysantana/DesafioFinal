@@ -49,9 +49,9 @@ app.get('/detalheSerie/:id', async(req, res) => {
             urlFoto:"http://image.tmdb.org/t/p/w185/"+response.data.poster_path,
             nome: response.data.original_name,
             ano: response.data.first_air_date,
-            avaliacoes: response.data.vote_average,
+            avaliacoes: response.data.vote_average ? response.data.vote_average : 'Esta série não tem avaliação no TMDB',
             classificacao: genreName.join(', '),
-            sinopse: response.data.overview,
+            sinopse: response.data.overview ? response.data.overview : 'Esta série não tem sinopse no TMDB',
             id: response.data.id
         }
         res.send(detalheSerie)
@@ -65,6 +65,7 @@ app.post ('/comentar', async(req, res) => {
         nome: req.body.nome,
         comentario: req.body.comentario,
         id_serie: req.body.input_idserie,
+        avaliacao: req.body.avaliacao
     })
     res.send(comentario)
 })

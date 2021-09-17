@@ -49,12 +49,49 @@ $(function(){
             data: {
                 input_idserie: e.target.input_idserie.value,
                 nome: e.target.nome.value,
-                comentario: e.target.comentario.value
+                comentario: e.target.comentario.value,
+                avaliacao: e.target.input_star.value
             },
             success: function() {
                 getComentario(idSerie);
                 e.target.reset();
+                estrelaClicada = false;
+                clearStar();
             }
         });
     })
 })
+
+function hoverStar(classi) {
+    let stars = $(classi);
+    stars.removeClass('fa-star-o');
+    stars.addClass('fa-star');
+}
+
+function clearStar() {
+    if(!estrelaClicada) {
+        let stars = $('.r5');
+        stars.removeClass('fa-star');
+        stars.addClass('fa-star-o');
+    }
+    
+}
+$('#star1').hover(function(e){hoverStar('.r1')}, function(e){clearStar()});
+$('#star2').hover(function(e){hoverStar('.r2')}, function(e){clearStar()});
+$('#star3').hover(function(e){hoverStar('.r3')}, function(e){clearStar()});
+$('#star4').hover(function(e){hoverStar('.r4')}, function(e){clearStar()});
+$('#star5').hover(function(e){hoverStar('.r5')}, function(e){clearStar()});
+
+
+function setStar(valor) {
+    $('#input_star').attr('value', valor);
+    hoverStar('.r' + valor);
+    estrelaClicada = true;
+}
+$('#star1').click(function(e){setStar(1)});
+$('#star2').click(function(e){setStar(2)});
+$('#star3').click(function(e){setStar(3)});
+$('#star4').click(function(e){setStar(4)});
+$('#star5').click(function(e){setStar(5)});
+
+var estrelaClicada = false;

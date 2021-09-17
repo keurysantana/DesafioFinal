@@ -1,5 +1,6 @@
 body{
     padding: 5% 10%;
+    background: url('/front/img/film.jpg');
 }
 
 header {
@@ -7,8 +8,9 @@ header {
 }
 
 main{
-    background-color: darkgray;
+    
     padding: 10px;
+    opacity: 0.9;
 }
 
 img{
@@ -16,9 +18,10 @@ img{
 }
 
 footer{
-    background-color: rosybrown;
+    background-color: moccasin;
     color: black;
     padding: 10px;
+    opacity: 0.9;
 }
 
 section{
