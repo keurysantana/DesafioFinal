@@ -21,14 +21,20 @@ async function getComentario(id) {
     try {
         const response = await fetch('http://localhost:3003/comentarios/'+id)
         const data = await response.json()
+        $("#comentario_back").html('');
         for(let c of data){
             let dataCom = new Date(c.data_comentario)
             let dataFormatada = (dataCom.getDate()) + "/" + (dataCom.getMonth()) + "/" + (dataCom.getFullYear());
             let comHtml = '<section>'
-                            + '<div>Nome: ' + c.nome + '</div>'
-                            + '<div>Data: ' + dataFormatada + '</div>'
-                            + '<div>Comentário: ' + c.comentario + '</div>'
-                        + '</section>'
+                            + '<div> ' + c.nome + '</div>'
+                            + '<div>';
+            for(let i = 1; i <= c.avaliacao; i++) {
+                comHtml += '<i class="fa fa-star" aria-hidden="true"></i>'
+            }
+            for(let i = 5 - c.avaliacao; i >0; i--) {
+                comHtml += '<i class="fa fa-star-o" aria-hidden="true"></i>'
+            }
+            comHtml += ' enviado em ' + dataFormatada + '</div><div>Comentário: ' + c.comentario + '</div></section>'
             $("#comentario_back").append(comHtml)
         }    
     } catch (error) {
@@ -50,7 +56,7 @@ $(function(){
                 input_idserie: e.target.input_idserie.value,
                 nome: e.target.nome.value,
                 comentario: e.target.comentario.value,
-                avaliacao: e.target.input_star.value
+                avaliacao: e.target.input_star.value ? e.target.input_star.value : 0
             },
             success: function() {
                 getComentario(idSerie);
@@ -73,8 +79,8 @@ function clearStar() {
         let stars = $('.r5');
         stars.removeClass('fa-star');
         stars.addClass('fa-star-o');
+        $('#input_star').attr('value', '');
     }
-    
 }
 $('#star1').hover(function(e){hoverStar('.r1')}, function(e){clearStar()});
 $('#star2').hover(function(e){hoverStar('.r2')}, function(e){clearStar()});

@@ -8,7 +8,6 @@ async function salvarComentario(comentario){
         id_serie: comentario.id_serie,
         avaliacao: comentario.avaliacao
     }
-    console.log(insertComentario);
     const result = await databaseConnection('tmdb_table').insert(insertComentario)
 
     if(result) {
