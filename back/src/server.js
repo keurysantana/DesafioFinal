@@ -1,9 +1,13 @@
+require('dotenv').config();
+
 const cors = require('cors');
 const express = require ('express')
 const app = express()
 const dataBase = require('./database/databaseKnex')
 const bodyParser = require('body-parser')
 const axios = require('axios');
+
+const api_key = process.env.apikey;
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -12,7 +16,7 @@ app.use(cors());
 app.get ('/listaPrincipal', async(req, res) => {
     var config = {
         method: 'get',
-        url: 'https://api.themoviedb.org/3/search/tv?api_key=7bd965a9aa82c3b1f149fb83984aa103&query=love&language=pt-PT',
+        url: 'https://api.themoviedb.org/3/search/tv?api_key=' + api_key + '&query=love&language=pt-PT',
         headers: { }
     };
 
@@ -35,7 +39,7 @@ app.get ('/listaPrincipal', async(req, res) => {
 app.get('/detalheSerie/:id', async(req, res) => {
     var config = {
         method: 'get',
-        url: 'https://api.themoviedb.org/3/tv/'+req.params.id+'?api_key=7bd965a9aa82c3b1f149fb83984aa103&language=pt-PT',
+        url: 'https://api.themoviedb.org/3/tv/'+req.params.id+'?api_key=' + api_key + '&language=pt-PT',
         headers: { }
     };
 
